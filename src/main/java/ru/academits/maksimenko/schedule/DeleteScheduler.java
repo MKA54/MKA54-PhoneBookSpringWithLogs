@@ -23,9 +23,10 @@ public class DeleteScheduler {
         }
 
         Random random = new Random();
-
         int index = random.nextInt(contactList.size() - 1);
 
         contactList.remove(index);
+
+        System.out.println("Contact deleted");
     }
 }
