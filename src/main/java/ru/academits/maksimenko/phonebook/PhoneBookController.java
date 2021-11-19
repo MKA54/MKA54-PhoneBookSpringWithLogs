@@ -36,12 +36,14 @@ public class PhoneBookController {
     @RequestMapping(value = "addContact", method = RequestMethod.POST)
     @ResponseBody
     public ContactValidation addContact(@RequestBody Contact contact) {
+        logger.info("called method addContact");
         return contactService.addContact(contact);
     }
 
     @RequestMapping(value = "deleteContact", method = RequestMethod.POST)
     @ResponseBody
     public void deleteContact(@RequestBody String id) {
+        logger.info("called method deleteContact");
         int ids = Integer.parseInt(id);
         contactService.deleteContact(ids);
     }
@@ -49,6 +51,7 @@ public class PhoneBookController {
     @RequestMapping(value = "deleteContacts", method = RequestMethod.POST)
     @ResponseBody
     public void deleteContacts(@RequestBody String id) {
+        logger.info("called method deleteContacts");
         id = id.substring(1, id.length() - 1);
 
         int[] indexList = Arrays.stream(id.split(","))
@@ -63,6 +66,7 @@ public class PhoneBookController {
     @RequestMapping(value = "filter", method = RequestMethod.POST)
     @ResponseBody
     public void filter(@RequestBody String text) {
+        logger.info("called method filter");
         text = text.substring(1, text.length() - 1);
         System.out.println(text);
         contactService.filter(text);
@@ -71,12 +75,14 @@ public class PhoneBookController {
     @RequestMapping(value = "resetFilter", method = RequestMethod.POST)
     @ResponseBody
     public void resetFilter() {
+        logger.info("called method resetFilter");
         contactService.resetFilter();
     }
 
     @RequestMapping(value = "download", method = RequestMethod.POST)
     @ResponseBody
     public void download() throws IOException {
+        logger.info("called method download");
         contactService.download();
     }
 }
