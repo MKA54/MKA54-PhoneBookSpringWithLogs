@@ -33,28 +33,28 @@ public class ContactService {
         ContactValidation contactValidation = new ContactValidation();
         contactValidation.setValid(true);
         if (contact.getFirstName().isEmpty()) {
-            logger.warn("Не заполнено имя");
+            logger.error("Не заполнено имя");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Имя должно быть заполнено.");
             return contactValidation;
         }
 
         if (contact.getLastName().isEmpty()) {
-            logger.warn("Не заполнена фамилия");
+            logger.error("Не заполнена фамилия");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Фамилия должно быть заполнено.");
             return contactValidation;
         }
 
         if (contact.getPhone().isEmpty()) {
-            logger.warn("Не заполнен телефон");
+            logger.error("Не заполнен телефон");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Телефон должно быть заполнено.");
             return contactValidation;
         }
 
         if (isExistContactWithPhone(contact.getPhone())) {
-            logger.warn("Номер телефона дублируется");
+            logger.error("Номер телефона дублируется");
             contactValidation.setValid(false);
             contactValidation.setError("Номер телефона не должен дублировать другие номера в телефонной книге.");
             return contactValidation;
