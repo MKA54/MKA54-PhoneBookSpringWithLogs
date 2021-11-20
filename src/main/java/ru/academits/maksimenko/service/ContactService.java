@@ -1,5 +1,7 @@
 package ru.academits.maksimenko.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.academits.maksimenko.dao.ContactDao;
 import ru.academits.maksimenko.model.Contact;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Service
 public class ContactService {
+    private static final Logger logger = LoggerFactory.getLogger(ContactService.class);
     private final ContactDao contactDao;
 
     public ContactService(ContactDao contactDao) {
@@ -30,24 +33,28 @@ public class ContactService {
         ContactValidation contactValidation = new ContactValidation();
         contactValidation.setValid(true);
         if (contact.getFirstName().isEmpty()) {
+            logger.warn("Не заполнено имя");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Имя должно быть заполнено.");
             return contactValidation;
         }
 
         if (contact.getLastName().isEmpty()) {
+            logger.warn("Не заполнена фамилия");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Фамилия должно быть заполнено.");
             return contactValidation;
         }
 
         if (contact.getPhone().isEmpty()) {
+            logger.warn("Не заполнен телефон");
             contactValidation.setValid(false);
             contactValidation.setError("Поле Телефон должно быть заполнено.");
             return contactValidation;
         }
 
         if (isExistContactWithPhone(contact.getPhone())) {
+            logger.warn("Номер телефона дублируется");
             contactValidation.setValid(false);
             contactValidation.setError("Номер телефона не должен дублировать другие номера в телефонной книге.");
             return contactValidation;
