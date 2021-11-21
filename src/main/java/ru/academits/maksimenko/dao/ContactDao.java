@@ -30,6 +30,10 @@ public class ContactDao {
         contactList.add(contact);
     }
 
+    public ContactDao getContactDao(){
+        return this;
+    }
+
     private int getNewId() {
         newId++;
 
