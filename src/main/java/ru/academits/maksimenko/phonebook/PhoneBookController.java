@@ -22,7 +22,7 @@ public class PhoneBookController {
         PhoneBookController.contactService = contactService;
     }
 
-    public static ContactService getContactService(){
+    public static ContactService getContactService() {
         return contactService;
     }
 
@@ -43,18 +43,18 @@ public class PhoneBookController {
     @RequestMapping(value = "deleteContact", method = RequestMethod.POST)
     @ResponseBody
     public void deleteContact(@RequestBody String id) {
-        logger.info("called method deleteContact");
+        logger.info("called method deleteContact, id = " + id);
         int ids = Integer.parseInt(id);
         contactService.deleteContact(ids);
     }
 
     @RequestMapping(value = "deleteContacts", method = RequestMethod.POST)
     @ResponseBody
-    public void deleteContacts(@RequestBody String id) {
-        logger.info("called method deleteContacts");
-        id = id.substring(1, id.length() - 1);
+    public void deleteContacts(@RequestBody String arrayIds) {
+        logger.info("called method deleteContacts, arrayIds = " + arrayIds);
+        arrayIds = arrayIds.substring(1, arrayIds.length() - 1);
 
-        int[] indexList = Arrays.stream(id.split(","))
+        int[] indexList = Arrays.stream(arrayIds.split(","))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
@@ -66,7 +66,7 @@ public class PhoneBookController {
     @RequestMapping(value = "filter", method = RequestMethod.POST)
     @ResponseBody
     public void filter(@RequestBody String text) {
-        logger.info("called method filter");
+        logger.info("called method filter, text = " + text);
         text = text.substring(1, text.length() - 1);
         System.out.println(text);
         contactService.filter(text);
