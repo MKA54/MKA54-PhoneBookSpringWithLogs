@@ -45,9 +45,15 @@ class PhoneBookSpringWithLogsApplicationTests {
         assertThat(contactService).isNotNull();
     }
 
-    public void addContact() {
+    public void addContactTest() {
         contactList.add(contact);
 
         Assertions.assertEquals(2, contactList.size());
+    }
+
+    public void deleteContactTest() {
+        contactList.removeIf(contact -> contact.getId() == 2);
+
+        Assertions.assertEquals(1, contactList.size());
     }
 }
