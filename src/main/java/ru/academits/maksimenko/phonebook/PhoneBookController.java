@@ -36,7 +36,7 @@ public class PhoneBookController {
     @RequestMapping(value = "addContact", method = RequestMethod.POST)
     @ResponseBody
     public ContactValidation addContact(@RequestBody Contact contact) {
-        logger.info("called method addContact");
+        logger.info("called method addContact, contact = " + contact.toString());
         return contactService.addContact(contact);
     }
 
